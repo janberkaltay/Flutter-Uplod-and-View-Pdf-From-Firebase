@@ -23,11 +23,10 @@ class _HomeScreenState extends State<HomeScreen> {
     await uploadTask.whenComplete(() {});
     final downloadLink = await reference.getDownloadURL();
 
-    // Dosyanın eklenme tarihini Firestore'a ekle
     await _firebaseFirestore.collection('pdfs').add({
       "name": fileName,
       "url": downloadLink,
-      "uploadDate": DateTime.now(), // Dosyanın eklenme tarihi
+      "uploadDate": DateTime.now(), 
     });
 
     return downloadLink;
@@ -53,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
     pdfData = results.docs.map((e) {
       Map<String, dynamic> data = e.data();
-      data["uploadDate"] = e.data()["uploadDate"].toDate(); // Dosyanın eklenme tarihini al ve tarih nesnesine dönüştür
+      data["uploadDate"] = e.data()["uploadDate"].toDate(); 
       return data;
     }).toList();
 
@@ -111,7 +110,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8.0),
                       child: Text( 'Yüklenme tarihi: ' +
-                        DateFormat('dd.mm.yyyy').format(pdfData[index]['uploadDate']), // Dosyanın eklenme tarihini göster
+                        DateFormat('dd.mm.yyyy').format(pdfData[index]['uploadDate']), 
                         style: const TextStyle(fontSize: 16, color: Colors.black),
                       ),
                     ),
